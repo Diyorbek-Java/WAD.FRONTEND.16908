@@ -1,0 +1,28 @@
+.navigation {
+    justify-content: space-between;
+    background-color: white;
+    padding: 0;
+
+    &_home {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+    }
+
+    &_text {
+        font-weight: 400;
+        font-family: 'Bangers', cursive;
+        font-size: 30px;
+        text-align: center;
+        letter-spacing: 3px;
+        text-shadow: 2px 2px 0px #2d303a, -2px -2px 0px #2d303a, -2px 2px 0px #2d303a, 2px -2px 0px #2d303a;
+        color: #fff;
+    }
+
+    .home-icon {
+        transform: scale(1.4);
+    }
+}
+

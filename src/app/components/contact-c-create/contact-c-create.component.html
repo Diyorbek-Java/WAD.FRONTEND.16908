@@ -1,0 +1,46 @@
+<mat-form-field class="field">
+    <mat-label>Name </mat-label>
+    <input matInput name="Name" type="text" [(ngModel)]="createContact.name">
+</mat-form-field>
+@if (!!errorObj?.['Name']) {
+    <mat-error class="field_error">{{errorObj?.['Name']}}</mat-error>
+}
+
+<mat-form-field class="field">
+    <mat-label>Email</mat-label>
+    <input matInput name="Email" type="text" [(ngModel)]="createContact.email">
+</mat-form-field>
+@if (!!errorObj?.['Email']) {
+    <mat-error class="field_error">{{errorObj?.['Email']}}</mat-error>
+}
+
+<mat-form-field class="field">
+    <mat-label>Phone</mat-label>
+    <input matInput name="Phone" type="text" [(ngModel)]="createContact.phone">
+</mat-form-field>
+@if (!!errorObj?.['$.Phone']) {
+    <mat-error class="field_error">{{errorObj?.['$.Phone']}}</mat-error>
+}
+
+<mat-form-field class="field">
+    <mat-label>Address</mat-label>
+    <input matInput name="Address" type="text" [(ngModel)]="createContact.address">
+</mat-form-field>
+@if (!!errorObj?.['Address']) {
+    <mat-error class="field_error">{{errorObj?.['Address']}}</mat-error>
+}
+
+<mat-form-field class="field">
+    <mat-label>Choose Group</mat-label>
+    <mat-select [(ngModel)]="groupId" name="Group">
+        @for(g of groups; track g.id)
+        {
+        <mat-option [value]="g.id">{{g.name}}</mat-option>
+        }
+    </mat-select>
+</mat-form-field>
+
+<div class="buttons">
+    <button mat-stroked-button (click)="clearForm()" color="accent">Clear</button>
+    <button mat-stroked-button (click)="submitForm()" color="primary">Submit</button>
+</div>

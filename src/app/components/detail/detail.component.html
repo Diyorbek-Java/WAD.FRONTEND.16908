@@ -1,0 +1,33 @@
+<div class="detail">
+    <h1>{{ title }} Detail</h1>
+    @for (item of detailIter; track $index) {
+        @if (item[0] !== 'description' && item[0] !== 'group') {
+            <div class="detail_item">
+                <p class="detail_item_key">{{item[0]}}</p>
+                <span class="detail_item_dots"></span>
+                <p>{{item[1] || 'null'}}</p>
+            </div>
+        }
+    }
+
+    <p>
+        {{ detail.description }}
+    </p>
+
+    @if (detail.group) {
+        <h1>Contact's Group Detail</h1>
+        @for (item of groupIter; track $index) {
+            @if (item[0] !== 'description') {
+                <div class="detail_item">
+                    <p class="detail_item_key">{{item[0]}}</p>
+                    <span class="detail_item_dots"></span>
+                    <p>{{item[1]}}</p>
+                </div>
+            }
+        }
+    }
+
+    <p>
+        {{ groupDesc }}
+    </p>
+</div>

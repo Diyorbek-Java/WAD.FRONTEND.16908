@@ -1,0 +1,9 @@
+table {
+    width: 100%;
+    .action_buttons{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+}

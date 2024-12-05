@@ -1,0 +1,6 @@
+<mat-toolbar class="navigation">
+    <div class="navigation_home" (click)="onLogoClick()">
+        <span class="navigation_text">{{ title }}</span>
+    </div>
+    <button mat-stroked-button [disabled]="buttonDisabled" (click)="createClick()">Create</button>
+</mat-toolbar>

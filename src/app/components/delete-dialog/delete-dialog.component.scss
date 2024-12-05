@@ -1,0 +1,25 @@
+.delete {
+    padding: 20px 30px;
+
+    &_title {
+        font-size: 24px;
+        text-align: center;
+        text-transform: capitalize;
+        font-weight: 600;
+    }
+
+    &_content {
+        font-size: 20px;
+        color: gray;
+    }
+    &_buttons{
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+        button{
+            width: 100px;
+        }
+    }
+}
