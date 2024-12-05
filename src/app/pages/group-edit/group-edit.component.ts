@@ -52,7 +52,7 @@ export class GroupEditComponent implements OnInit {
 
   save() {
     if (this.form.valid && this.group) {
-      this.groupService.updateGroup(this.group.id, this.form.value).subscribe({
+      this.groupService.updateGroup(this.group.id, {...this.form.value, id: this.group.id}).subscribe({
         next: () => {
           this.router.navigate(['/group']);
         },

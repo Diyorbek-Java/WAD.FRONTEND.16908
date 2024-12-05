@@ -18,7 +18,8 @@ export class GroupService {
     return this.httpClient.get<Group>(`${BASE_URL}/Group/${id}`);
   };
 
-  updateGroup(id: number, group: GroupCreate){
+  updateGroup(id: number, group: Group){
+    console.log(group);
     return this.httpClient.put(`${BASE_URL}/Group/${id}`, group);  
   };
 
