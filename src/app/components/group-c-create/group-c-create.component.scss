@@ -26,3 +26,24 @@
         width: 100%;
     }
 }
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 400px;
+    margin: 0 auto;
+
+    &-actions {
+        display: flex;
+        justify-content: flex-end;
+        
+        button {
+            min-width: 120px;
+        }
+    }
+}
+
+mat-form-field {
+    width: 100%;
+}

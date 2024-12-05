@@ -1,28 +1,69 @@
-import { Component, inject } from '@angular/core';
-import { CCreateComponent } from '../../components/group-c-create/group-c-create.component';
-import { Group } from '../../../interfaces/group.interface';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GroupService } from '../../../services/group.service';
+import { Group } from '../../../interfaces/group.interface';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-group-edit',
   standalone: true,
-  imports: [CCreateComponent],
+  imports: [
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './group-edit.component.html',
-  styleUrl: './group-edit.component.scss'
+  styleUrls: ['./group-edit.component.scss']
 })
-export class GroupEditComponent {
-  groupDetail: Group = {
-    id: 0,
-    name: '',
-  }
+export class GroupEditComponent implements OnInit {
+  private fb = inject(FormBuilder);
+  private groupService = inject(GroupService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
-  activatedRoute = inject(ActivatedRoute)
-  groupService = inject(GroupService)
+  group?: Group;
+  form: FormGroup = this.fb.group({
+    name: ['', [Validators.required]]
+  });
 
   ngOnInit() {
-    this.groupService.getGroup(this.activatedRoute.snapshot.params["id"]).subscribe((group)=>{
-    this.groupDetail = group;
-    });
+    const groupId = this.route.snapshot.params['id'];
+    if (groupId) {
+      this.groupService.getGroup(groupId).subscribe({
+        next: (group) => {
+          this.group = group;
+          this.form.patchValue({
+            name: group.name
+          });
+        },
+        error: (error) => {
+          console.error('Error loading group:', error);
+          this.router.navigate(['/group']);
+        }
+      });
+    }
+  }
+
+  save() {
+    if (this.form.valid && this.group) {
+      this.groupService.updateGroup(this.group.id, this.form.value).subscribe({
+        next: () => {
+          this.router.navigate(['/group']);
+        },
+        error: (error) => {
+          console.error('Error updating group:', error);
+        }
+      });
+    }
+  }
+
+  cancel() {
+    this.router.navigate(['/group']);
   }
 }

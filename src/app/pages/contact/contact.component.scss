@@ -1,6 +1,28 @@
 .contact {
-    padding-top: 30px;
-    h1 {
-        text-align: center;
+    padding-top: 80px;
+    padding-bottom: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 16px;
+    padding-right: 16px;
+
+    &-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+
+        h1 {
+            margin: 0;
+            color: #2d303a;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .contact {
+        padding-top: 72px;
+        padding-left: 12px;
+        padding-right: 12px;
     }
 }

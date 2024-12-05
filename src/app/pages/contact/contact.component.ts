@@ -4,23 +4,29 @@ import { ContactService } from '../../../services/contact.service';
 import { Contact } from '../../../interfaces/contact.interface';
 import { TableKey } from '../../../types';
 import { TableComponent } from '../../components/table/table.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [TableComponent],
+  imports: [TableComponent, MatButtonModule, MatIconModule],
   templateUrl: './contact.component.html',
-  styleUrl: './contact.component.scss'
+  styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent {
-  router = inject(Router)
-  contactService = inject(ContactService)
-  contacts: Contact[] = []
+  router = inject(Router);
+  contactService = inject(ContactService);
+  contacts: Contact[] = [];
 
-  ngOnInit(){
-    this.contactService.getContacts().subscribe((result)=>{
+  ngOnInit() {
+    this.contactService.getContacts().subscribe((result) => {
       this.contacts = result;
     });
+  }
+
+  createContact() {
+    this.router.navigate(['/contact-create']);
   }
 
   displayedColumns: TableKey[] = [

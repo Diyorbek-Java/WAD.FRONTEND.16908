@@ -1,12 +1,15 @@
-<mat-form-field class="field">
-    <mat-label>Name </mat-label>
-    <input matInput name="Name" type="text" [(ngModel)]="createGroup.name">
-</mat-form-field>
-@if (!!errorObj?.['Name']) {
-    <mat-error class="field_error">{{errorObj?.['Name']}}</mat-error>
-}
-
-<div class="buttons">
-    <button mat-stroked-button (click)="clearForm()" color="accent">Clear</button>
-    <button mat-stroked-button (click)="submitForm()" color="primary">Submit</button>
-</div>
+<form [formGroup]="form" class="form">
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" placeholder="Enter name">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" placeholder="Enter description"></textarea>
+    </mat-form-field>
+    <div class="form-actions">
+        <button mat-raised-button color="primary" (click)="create()" [disabled]="!form.valid">
+            Create Group
+        </button>
+    </div>
+</form>

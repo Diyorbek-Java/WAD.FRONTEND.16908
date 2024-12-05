@@ -1,4 +1,9 @@
 <div class="contact">
-    <h1>Contact Table</h1>
+    <div class="contact-header">
+        <h1>Contact Table</h1>
+        <button mat-fab color="primary" (click)="createContact()" aria-label="Create new contact">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
     <app-table [tasks]="contacts" [displayedColumns]="displayedColumns"></app-table>
 </div>

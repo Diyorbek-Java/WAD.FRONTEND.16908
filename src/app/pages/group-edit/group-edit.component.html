@@ -1,2 +1,15 @@
-<h1>Group Edit</h1>
-<app-c-create [groupDetail]="groupDetail" [isEdit]="true"></app-c-create>
+<div class="group-edit">
+    <h1>Edit Group</h1>
+    <form [formGroup]="form" class="form" *ngIf="group">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" placeholder="Enter name">
+        </mat-form-field>
+        <div class="form-actions">
+            <button mat-button (click)="cancel()">Cancel</button>
+            <button mat-raised-button color="primary" (click)="save()" [disabled]="!form.valid">
+                Save Changes
+            </button>
+        </div>
+    </form>
+</div>

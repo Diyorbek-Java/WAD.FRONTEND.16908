@@ -1,2 +1,14 @@
-<h1>Group Create</h1>
-<app-c-create></app-c-create>
+<div class="group-create">
+    <h1>Create Group</h1>
+    <form [formGroup]="form" class="form">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" placeholder="Enter group name">
+        </mat-form-field>
+        <div class="form-actions">
+            <button mat-raised-button color="primary" (click)="create()" [disabled]="!form.valid">
+                Create Group
+            </button>
+        </div>
+    </form>
+</div>

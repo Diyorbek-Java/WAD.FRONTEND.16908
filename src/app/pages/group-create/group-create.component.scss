@@ -2,3 +2,47 @@ h1{
     padding-top: 50px;
     text-align: center;
 }
+
+.group-create {
+    padding-top: 80px;
+    padding-bottom: 24px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-left: 16px;
+    padding-right: 16px;
+
+    h1 {
+        text-align: center;
+        margin-bottom: 24px;
+        color: #2d303a;
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 400px;
+    margin: 0 auto;
+
+    &-actions {
+        display: flex;
+        justify-content: flex-end;
+        
+        button {
+            min-width: 120px;
+        }
+    }
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    .group-create {
+        padding-top: 72px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}

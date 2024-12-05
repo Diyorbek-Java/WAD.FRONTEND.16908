@@ -1,41 +1,35 @@
 import { Component, inject } from '@angular/core';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { NavigationEnd, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-navigation',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatToolbarModule,
-    MatIconModule
-  ],
+  imports: [MatToolbarModule, MatIconModule, MatButtonModule],
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+  styleUrl: './navigation.component.scss'
 })
 export class NavigationComponent {
-  private router = inject(Router);
-  title: string = "Contact Manager";
+  router =inject(Router)
+  location = inject(Location)
+  title: string = "Contact App"
+  buttonDisabled: boolean = false
 
   onLogoClick() {
-    this.router.navigate(['/home']);
+    this.router.navigateByUrl("home")
+  }
+
+  createClick() {
+    this.router.navigateByUrl(this.location.path() + '-create')
   }
 
   ngOnInit() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        const currentUrl = event.url;
-        
-        // Update title based on current route
-        if (currentUrl.includes('group')) {
-          this.title = 'Group Manager';
-        } else if (currentUrl.includes('contact')) {
-          this.title = 'Contact Manager';
-        } else {
-          this.title = 'Contact App';
-        }
+        this.buttonDisabled = !(event.url === '/group' || event.url === '/contact')
       }
     });
   }

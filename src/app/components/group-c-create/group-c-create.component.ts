@@ -1,63 +1,42 @@
-import { Component, Input, inject } from '@angular/core';
-import {MatSelectModule} from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { Router } from '@angular/router';
 import { GroupService } from '../../../services/group.service';
-import { Group, GroupCreate } from '../../../interfaces/group.interface';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-c-create',
+  selector: 'app-group-c-create',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, FormsModule, ReactiveFormsModule, MatButtonModule],
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './group-c-create.component.html',
-  styleUrl: './group-c-create.component.scss'
+  styleUrls: ['./group-c-create.component.scss']
 })
-export class CCreateComponent {
-  @Input()
-  groupDetail!: Group;
+export class GroupCCreateComponent {
+  private fb = inject(FormBuilder);
+  private groupService = inject(GroupService);
+  private router = inject(Router);
 
-  @Input()
-  isEdit: boolean = false
+  form: FormGroup = this.fb.group({
+    name: ['', [Validators.required]],
+    description: ['', [Validators.required]]
+  });
 
-  router = inject(Router)
-  groupService = inject(GroupService)
-  activatedRoute = inject(ActivatedRoute)
-
-  createGroup: GroupCreate = {
-    name: '',
-  }
-  errorObj: any;
-
-
-  ngOnChanges() {
-    this.createGroup = this.groupDetail;
-  }
-
-  clearForm() {
-    this.createGroup = {
-      name: '',
-    }
-  }
-
-  submitForm() {
-    if(this.isEdit) {
-      this.groupService.updateGroup(this.activatedRoute.snapshot.params["id"], this.createGroup).subscribe(_=>{
-        alert("Group Updated")
-        this.router.navigateByUrl("group");
-      },
-      error => {
-        this.errorObj = error.error.errors;
-      })
-    }else{
-      this.groupService.createGroup(this.createGroup).subscribe(_=> {
-        alert("Group created")
-        this.router.navigateByUrl("group")
-      },
-      error => {
-        this.errorObj = error.error.errors;
+  create() {
+    if (this.form.valid) {
+      this.groupService.createGroup(this.form.value).subscribe({
+        next: () => {
+          this.router.navigate(['/group']);
+        },
+        error: (error) => {
+          console.error('Error creating group:', error);
+        }
       });
     }
   }

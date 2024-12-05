@@ -1,4 +1,9 @@
 <div class="group">
-    <h1>Group Table</h1>
+    <div class="group-header">
+        <h1>Group Table</h1>
+        <button mat-fab color="primary" (click)="createGroup()" aria-label="Create new group">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
     <app-table [tasks]="groups" [displayedColumns]="displayedColumns"></app-table>
 </div>
