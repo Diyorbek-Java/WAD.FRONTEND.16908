@@ -1,4 +1,10 @@
 <div class="home">
-    <button mat-stroked-button class="home_button" (click)="buttonClick('group')">Group</button>
-    <button mat-stroked-button class="home_button" (click)="buttonClick('contact')">Contact</button>
+    <h1 class="home_title">Welcome to <span>Contact Manager</span></h1>
+    <p class="home_subtitle">
+        Efficiently manage your contacts and groups with our intuitive interface. Choose an option below to get started.
+    </p>
+    <div class="home_buttons">
+        <button mat-flat-button class="home_button" (click)="buttonClick('group')">Manage Groups</button>
+        <button mat-stroked-button class="home_button" (click)="buttonClick('contact')">View Contacts</button>
+    </div>
 </div>

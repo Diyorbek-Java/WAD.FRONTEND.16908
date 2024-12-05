@@ -1,3 +1,31 @@
 <div class="contact">
-    <app-detail [detail]="contactDetail" title="Contact"></app-detail>
+    <ng-container *ngIf="loading; else errorTemplate">
+        <div class="contact-loading">
+            Loading contact details...
+        </div>
+    </ng-container>
+    <ng-template #errorTemplate>
+        <ng-container *ngIf="error; else contentTemplate">
+            <div class="contact-error">
+                {{ error }}
+                <button mat-stroked-button color="primary" (click)="goBack()">Go Back</button>
+            </div>
+        </ng-container>
+        <ng-template #contentTemplate>
+            <div class="contact-header">
+                <h1>Contact Details</h1>
+                <button mat-stroked-button color="primary" (click)="goBack()">
+                    Back to Contacts
+                </button>
+            </div>
+
+            <app-detail [detail]="contactDetail" title="Contact"></app-detail>
+
+            <div class="contact-actions">
+                <button mat-stroked-button color="accent" (click)="editContact()">
+                    Edit Contact
+                </button>
+            </div>
+        </ng-template>
+    </ng-template>
 </div>
